@@ -1,15 +1,38 @@
 <?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+use Yii;
+use kouosl\main\models\product;
+use yii\data\ActiveDataProvider;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+
 /* @var $this yii\web\View */
-$this->title = 'WYP Sample Application';
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Products';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="profile-index">
+<div class="product-index">
 
-    <div class="jumbotron">
-        <h1>Kou Osl Yii2 App - backend</h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-        <p class="lead">Örnek uygulamayı başarılı bir şekilde çalıştırdınız.</p>
+    <p>
+        <?= Html::a('Create Product', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
-        <p><a class="btn btn-lg btn-success" href="#">Modüller ve konfürgasyon!</a></p>
-    </div>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
+            'name',
+            'price',
+            'stock',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 </div>

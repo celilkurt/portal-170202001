@@ -1,11 +1,9 @@
-<?php
-/* @var $this yii\web\View */
-$this->title = 'WYP Sample Application';
-?>
-<div class="profile-index">
+<?= $this->title = 'Modül çalışıyor.'; ?>
+<div class="site-index">
 
     <div class="jumbotron">
-        <h1>Kou Osl Yii2 App - frontend</h1>
+        <h1>Kou Osl Yii2 App</h1>
+        <h1>Frontend index</h1>
 
         <p class="lead">Örnek uygulamayı başarılı bir şekilde çalıştırdınız.</p>
 
