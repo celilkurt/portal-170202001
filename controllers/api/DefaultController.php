@@ -1,17 +1,18 @@
 <?php
+namespace kouosl\main\controllers\api;
 
-namespace kouosl\profile\controllers\api;
 
-use Yii;
-
-class DefaultController extends \kouosl\profile\controllers\api\BaseController
+/**
+ * Default controller for the `main` module
+ */
+class DefaultController extends \kouosl\base\controllers\api\BaseController
 {
-     /**
+    /**
      * Renders the index view for the module
      * @return string
      */
     public function actionIndex()
     {
-        return true;
+        return $this->render('_index');
     }
 }

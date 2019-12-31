@@ -1,18 +1,18 @@
 {
-    "name": "kouosl/portal-profile",
-    "description": "User module for profile PORTAL",
+    "name": "kouosl/portal-main",
+    "description": "Sample module for KOUOSL PORTAL",
     "type": "yii2-extension",
-    "keywords": ["yii2", "yii 2", "user", "users", "module", "modules"],
+    "keywords": ["yii2", "yii 2", "main", "module", "modules"],
     "license": "BSD-3-Clause",
     "authors": [
         {
-            "name": "Abdulcelil Kurt",
-            "email": "celilkurt82@gmail.com"
+            "name": "Ekrem HATİPOĞLU",
+            "email": "ekrem.hatipoglu@outlook.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "portal-170202001\\user\\": ""
+            "kouosl\\main\\": ""
         }
     }
 }

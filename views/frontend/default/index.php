@@ -1,15 +1,29 @@
 <?php
+
+use yii\helpers\Html;
+use yii\grid\GridView;
+
 /* @var $this yii\web\View */
-$this->title = 'WYP Sample Application';
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = 'Products';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="profile-index">
+<div class="product-index">
 
-    <div class="jumbotron">
-        <h1>Kou Osl Yii2 App - frontend</h1>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-        <p class="lead">Örnek uygulamayı başarılı bir şekilde çalıştırdınız.</p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
-        <p><a class="btn btn-lg btn-success" href="#">Modüller ve konfürgasyon!</a></p>
-    </div>
-
+            'name',
+            'price',
+            'stock',
+            
+        ],
+        
+    ]); ?>
 </div>
+
