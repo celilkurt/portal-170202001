@@ -1,13 +1,49 @@
-<?= $this->title = 'Modül çalışıyor.'; ?>
-<div class="site-index">
+<?php
 
-    <div class="jumbotron">
-        <h1>Kou Osl Yii2 App</h1>
-        <h1>Frontend index</h1>
+use yii\helpers\Html;
+use yii\grid\GridView;
 
-        <p class="lead">Örnek uygulamayı başarılı bir şekilde çalıştırdınız.</p>
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-        <p><a class="btn btn-lg btn-success" href="#">Modüller ve konfürgasyon!</a></p>
-    </div>
+$this->title = 'Shopping page';
+$this->params['breadcrumbs'][] = $this->title;
 
+?>
+
+
+
+
+<div class="product-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'name',
+            'price',
+            'stock',
+            ['class' => 'yii\grid\CheckboxColumn',],
+            
+        ],
+        
+    ]); ?>
+
+<script type="text/javascript">
+
+function userClicks(target_id) {
+
+	alert("Script works perfectly");
+
+}
+
+</script>
+    
+    <p>
+        <?= Html::a('Buy', ['buy'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>
+

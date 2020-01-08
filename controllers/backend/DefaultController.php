@@ -24,7 +24,7 @@ class DefaultController extends \kouosl\base\controllers\backend\BaseController
         $model = new \kouosl\main\models\Product;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('product',['model'=>$model,]);
@@ -69,7 +69,7 @@ class DefaultController extends \kouosl\base\controllers\backend\BaseController
         $model = new \kouosl\main\models\Product;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->name]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -89,7 +89,8 @@ class DefaultController extends \kouosl\base\controllers\backend\BaseController
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->name]);
+            
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
