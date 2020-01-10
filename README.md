@@ -65,6 +65,11 @@ Backend-index'e 'portal.kouosl/admin/main/default/sold' adresinden erişilebilir
 
 ![enter image description here](https://github.com/2019-BLM317/portal-170202001/blob/master/imgs/backend-2.jpg)
 
+### Dil Paketleri
+Varolan tek dil paketi '/messages/tr-TR/main.php' dosyasıdır.
+Dosyayı görmek için: [main.php]([https://github.com/2019-BLM317/portal-170202001/blob/master/messages/tr-TR/main.php](https://github.com/2019-BLM317/portal-170202001/blob/master/messages/tr-TR/main.php))
+
+
 ### RBAC
 Migration kodlarının işletilmesiyle RBAC için gerekli tablolar, kurallar, ilişkilendirmeler ve yetki atamları tanımalanmış olur.
 Kodların işletilmesiyle üç rule tanımlanıyor. admin(create-product'ın ve create-sold_products'ın parent'ıdır), create-product ve create -sold_products. Bu tanımlamalarla herhangi bir kullanıcının tablolara erişimi kısıtlanmış olur. 
@@ -91,3 +96,4 @@ else{
 	throw  new  ForbiddenHttpException;
 }
 ```
+
