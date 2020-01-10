@@ -1,13 +1,13 @@
 {
     "name": "kouosl/portal-main",
-    "description": "Sample module for KOUOSL PORTAL",
+    "description": "Main module for KOUOSL PORTAL",
     "type": "yii2-extension",
     "keywords": ["yii2", "yii 2", "main", "module", "modules"],
     "license": "BSD-3-Clause",
     "authors": [
         {
-            "name": "Ekrem HATİPOĞLU",
-            "email": "ekrem.hatipoglu@outlook.com"
+            "name": "Abdulcelil KURT",
+            "email": "celilkurt82@gmail.com"
         }
     ],
     "autoload": {
