@@ -58,7 +58,7 @@ class Module extends \kouosl\base\Module
 
     public function registerTranslations()
     {
-        Yii::$app->i18n->translations['site/*'] = [
+        Yii::$app->i18n->translations['main/*'] = [
             'class' => 'yii\i18n\PhpMessageSource',
             'sourceLanguage' => 'en-US',
             'basePath' => '@kouosl/main/messages',
@@ -70,6 +70,15 @@ class Module extends \kouosl\base\Module
 
     public static function t($category, $message, $params = [], $language = null)
     {
+         Yii::$app->i18n->translations['main/*'] = [
+            'class' => 'yii\i18n\PhpMessageSource',
+            'sourceLanguage' => 'en-US',
+            'basePath' => '@kouosl/main/messages',
+            'fileMap' => [
+                'main/main' => 'main.php',
+            ],
+        ];
+        
         return Yii::t('main/'. $category, $message, $params, $language);
     }
 
