@@ -5,14 +5,12 @@ namespace kouosl\main\controllers\api;
 /**
  * Default controller for the `main` module
  */
-class DefaultController extends \kouosl\base\controllers\api\BaseController
+class DefaultController extends ActiveController
 {
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
+    public $modelClass = 'kouosl\main\models\Product';
+    
     public function actionIndex()
     {
-        return $this->render('_index');
+        return $this->render('index');
     }
 }

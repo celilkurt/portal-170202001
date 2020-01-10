@@ -3,37 +3,19 @@ namespace kouosl\main\controllers\backend;
 
 use Yii;
 use kouosl\main\models\product;
+use kouosl\main\models\sold_products;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * Default controller for the `main` module
  */
 class DefaultController extends \kouosl\base\controllers\backend\BaseController
 {
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
     
-
-    public function actionProduct()
-    {   
-        $model = new \kouosl\main\models\Product;
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->name]);
-        }
-
-        return $this->render('product',['model'=>$model,]);
-        
-
-
-
-        //return $this->render('product');
-    }
 
     public function actionIndex()
     {
@@ -66,15 +48,21 @@ class DefaultController extends \kouosl\base\controllers\backend\BaseController
      */
     public function actionCreate()
     {
-        $model = new \kouosl\main\models\Product;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->name]);
+        if(Yii::$app->user->can('create-product')){
+            $model = new \kouosl\main\models\Product;
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException;
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        
     }
 
     /**
@@ -86,14 +74,32 @@ class DefaultController extends \kouosl\base\controllers\backend\BaseController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if(Yii::$app->user->can('create-product')){
+            $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->name]);
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }else{
+            throw new ForbiddenHttpException;
         }
+        
+    }
 
-        return $this->render('update', [
-            'model' => $model,
+    public function actionSold()
+    {
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => sold_products::find(),
+        ]);
+
+        return $this->render('sold', [
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -106,9 +112,15 @@ class DefaultController extends \kouosl\base\controllers\backend\BaseController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if(Yii::$app->user->can('create-product')){
 
-        return $this->redirect(['index']);
+            $this->findModel($id)->delete();
+
+            return $this->redirect(['index']);
+
+        }else{
+            throw new ForbiddenHttpException;
+        }
     }
 
     /**

@@ -1,18 +1,25 @@
 <?php
+
 namespace kouosl\main\controllers\console;
+//namespace app\commands;
 
+use yii\console\Controller;
 
-/**
- * Default controller for the `main` module
- */
 class DefaultController extends \kouosl\base\controllers\console\BaseController
 {
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
+    public $message;
+    public function options($actionID)
+    {
+        return [’message’];
+    }
+    
+    public function optionAliases()
+    {
+        return [’m’ => ’message’];
+    }
+    
     public function actionIndex()
     {
-        return $this->render('_index');
+        echo $this->message . "\n";
     }
 }

@@ -3,6 +3,7 @@
 namespace kouosl\main\controllers\frontend;
 
 use Yii;
+use kouosl\main\models\sold_products;
 use kouosl\main\models\product;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -29,15 +30,67 @@ class DefaultController extends Controller
         ];
     }
 
+    
+
+    public function actionBulk(){
+        $amount = 0;
+        $selection=(array)Yii::$app->request->post('selection');//typecasting
+        foreach($selection as $id){
+
+            $e=product::findOne((int)$id);//make a typecasting
+            $e->stock -= 1;
+            $amount += $e->price;
+            $e->save();
+
+            if (sold_products::find()->where( [ 'id' => $e->id ] )->exists() ) {
+
+                $new_sold =  sold_products::findOne((int)$e->id);
+                $new_sold->stock += 1;
+                $new_sold->save();
+
+            }else{
+                $new_sold = new \kouosl\main\models\Sold_products;
+                $new_sold->id = $e->id;
+                $new_sold->name =  $e->name;
+                $new_sold->price =  $e->price;
+                $new_sold->stock = 1;
+                $new_sold->save();
+            }
+            
+            
+            
+            
+
+
+
+        }
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => product::find(),
+        ]);
+
+
+        return $this->render('showflash', [
+            'dataProvider' => $dataProvider,
+            'cost' => $amount,
+        ]);
+
+        }
+
     /**
      * Lists all product models.
      * @return mixed
      */
     public function actionIndex()
     {
+        $num = -1;
+        $model = new \kouosl\main\models\Product;
+
         $dataProvider = new ActiveDataProvider([
             'query' => product::find(),
         ]);//Bütün kayıtları $dataProvider'e atar.
+
+        
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
@@ -100,4 +153,11 @@ class DefaultController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionShowFlash() {
+        $session = Yii::$app->session;
+        
+        $session->setFlash('buy', 'Satın alma başarılı!');
+        return $this->render('showflash');
+     }
 }
