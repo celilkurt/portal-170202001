@@ -30,7 +30,7 @@ composer update
 
 
 ### Migration'larla tabloların oluşturulması ve kayıt eklenmesi
-Modülün kullanılabilmesi için gerekli tabloların oluşturulması ve örnek kayıtların girilmesi için aşağıdaki kodlar çalıştırılmalıdır.
+Modülün kullanılabilmesi için gerekli tabloların oluşturulması ve örnek kayıtların girilmesi için aşağıdaki kodlar çalıştırılmalıdır. RBAC, tablolar üzerinden yapıldığından migration kodlarının çalıştırılmasıyla tablolar, kurallar ve ilişkiler oluşturuluyor.
 ```
 vagrant ssh
 php yii migrate --migrationPath=/var/www/portal/vendor/kouosl/portal-main/migrations
