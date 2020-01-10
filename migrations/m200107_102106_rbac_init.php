@@ -167,12 +167,12 @@ class m200107_102106_rbac_init extends \yii\db\Migration
 
         $this->insert('auth_assignment', [
             "item_name" => "admin",
-            "user_id" => "create-sold_products",
+            "user_id" => "1",
         ]);
 
         $this->insert('auth_assignment', [
-            "item_name" => "create-product",
-            "user_id" => "create-sold_products",
+            "item_name" => "create-sold_products",
+            "user_id" => "2",
         ]);
 
         

@@ -9,6 +9,7 @@ use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * DefaultController implements the CRUD actions for product model.
@@ -32,37 +33,36 @@ class DefaultController extends Controller
 
     
 
-    public function actionBulk(){
-        $amount = 0;
-        $selection=(array)Yii::$app->request->post('selection');//typecasting
-        foreach($selection as $id){
+    public function actionBuy(){
+        if(Yii::$app->user->can('create-sold_products')){
+            $amount = 0;
+            $selection=(array)Yii::$app->request->post('selection');//typecasting
+            foreach($selection as $id){
 
-            $e=product::findOne((int)$id);//make a typecasting
-            $e->stock -= 1;
-            $amount += $e->price;
-            $e->save();
+                $e=product::findOne((int)$id);//make a typecasting
+                $e->stock -= 1;
+                $amount += $e->price;
+                $e->save();
 
-            if (sold_products::find()->where( [ 'id' => $e->id ] )->exists() ) {
+                if (sold_products::find()->where( [ 'id' => $e->id ] )->exists() ) {
 
-                $new_sold =  sold_products::findOne((int)$e->id);
-                $new_sold->stock += 1;
-                $new_sold->save();
+                    $new_sold =  sold_products::findOne((int)$e->id);
+                    $new_sold->stock += 1;
+                    $new_sold->save();
 
-            }else{
-                $new_sold = new \kouosl\main\models\Sold_products;
-                $new_sold->id = $e->id;
-                $new_sold->name =  $e->name;
-                $new_sold->price =  $e->price;
-                $new_sold->stock = 1;
-                $new_sold->save();
-            }
-            
-            
-            
-            
+                }else{
+                    $new_sold = new \kouosl\main\models\Sold_products;
+                    $new_sold->id = $e->id;
+                    $new_sold->name =  $e->name;
+                    $new_sold->price =  $e->price;
+                    $new_sold->stock = 1;
+                    $new_sold->save();
+                }
 
+        }
 
-
+        }else{
+            throw new ForbiddenHttpException;
         }
 
         $dataProvider = new ActiveDataProvider([

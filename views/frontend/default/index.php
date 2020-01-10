@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <?=Html::beginForm(['bulk'],'post');?>
+    <?=Html::beginForm(['buy'],'post');?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
