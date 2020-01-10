@@ -43,6 +43,7 @@ Frontend'e 'portal.kouosl/main' adresinden erişilebilir.
 
 ![enter image description here](https://github.com/2019-BLM317/portal-170202001/blob/master/imgs/al%C4%B1%C5%9Fveri%C5%9F-1.bmp)
 
+####Flash mesaj kullanımı
 Satın alma tamamlandıysa alışveriş tutarı **flash mesajla** kullanıcıya bildirilir.
 ```
 $message = "Successful. Shopping amount is $cost pounds";
@@ -51,6 +52,9 @@ Yii::$app->session->setFlash('buy', $message);
 ```
 
 ![enter image description here](https://github.com/2019-BLM317/portal-170202001/blob/master/imgs/sat%C4%B1n%20alma%20tamam.bmp)
+
+####Widget
+Widget kullanımına örnek olarak gii'nin oluşturduğu gridview özelleştirilerek kullanıldı.
 
 ### Backend
 portal.kouosl/admin/main adresinde varolan ürün kayıtlarını görebilir, 'create new product' butonu ile eğer izniniz varsa yeni kayıt oluşturabilir veya 'Show sold products' butonu ile satılan ürünlerin kaydını görebilirsiniz.
